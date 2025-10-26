@@ -8,10 +8,10 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(set<Goat> trip);
+int select_goat(const set<Goat> trip);
 void delete_goat(set<Goat> &trip);
 void add_goat(set<Goat> &trip, string names[], string colors[]);
-void display_trip(set<Goat> trip);
+void display_trip(const set<Goat> trip);
 int main_menu();
 
 int main() {
@@ -68,7 +68,7 @@ int main() {
 }
 
 
-int select_goat(set<Goat> trip)
+int select_goat(const set<Goat> trip)
 {
     int choice;
     display_trip(trip);
@@ -104,7 +104,7 @@ void delete_goat(set<Goat> &trip)
     }
 
     int index = 1; // start counting from 1
-    for (auto it = trip.begin(); it != trip.end(); it++, index++)
+    for (set<Goat>::iterator it = trip.begin(); it != trip.end(); it++, index++)
     {
         if (index == choice) {
             cout << "Removing: ";
@@ -132,7 +132,7 @@ void add_goat(set<Goat> &trip, string names[], string colors[])
     cout << " to the trip" << endl;
 }
 
-void display_trip(set<Goat> trip)
+void display_trip(const set<Goat> trip)
 {
     if (trip.empty())
     {
@@ -142,7 +142,7 @@ void display_trip(set<Goat> trip)
 
     cout << "Current Goat Trip:" << endl;
     int index = 1; // loop through the list and output
-    for (auto it = trip.begin(); it != trip.end(); it++)
+    for (set<Goat>::iterator it = trip.begin(); it != trip.end(); it++)
     {
         cout << "[" << setw(2) << index << "] ";
         // use helper function

@@ -37,7 +37,7 @@ public:
         return name < goat.name;
     }
 
-    void display()
+    void display() const // to fix iterator issue
     {
         cout << name << "(" << age << ", " << color << ")";
     }
