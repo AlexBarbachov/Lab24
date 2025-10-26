@@ -1,17 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include <cstdlib>
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string names[], string colors[]);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string names[], string colors[]);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main() {
@@ -32,7 +32,7 @@ int main() {
 
     bool ag = true;
 
-    list<Goat> trip;
+    set<Goat> trip;
 
     int choice;
     while (ag)
@@ -68,7 +68,7 @@ int main() {
 }
 
 
-int select_goat(list<Goat> trip)
+int select_goat(set<Goat> trip)
 {
     int choice;
     display_trip(trip);
@@ -88,7 +88,7 @@ int select_goat(list<Goat> trip)
     return 0;
 }
 
-void delete_goat(list<Goat> &trip)
+void delete_goat(set<Goat> &trip)
 {
     if (trip.empty())
     {
@@ -104,7 +104,7 @@ void delete_goat(list<Goat> &trip)
     }
 
     int index = 1; // start counting from 1
-    for (list<Goat>::iterator it = trip.begin(); it != trip.end(); it++, index++)
+    for (auto it = trip.begin(); it != trip.end(); it++, index++)
     {
         if (index == choice) {
             cout << "Removing: ";
@@ -117,7 +117,7 @@ void delete_goat(list<Goat> &trip)
 
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[])
+void add_goat(set<Goat> &trip, string names[], string colors[])
 {
     // generate random attributes
     int nameID = rand() % SZ_NAMES;
@@ -125,14 +125,14 @@ void add_goat(list<Goat> &trip, string names[], string colors[])
     int age = rand() % MAX_AGE + 1;
 
     Goat goat(names[nameID], age, colors[colorID]);
-    trip.push_back(goat);
+    trip.insert(goat);
 
     cout << "Added ";
     goat.display();
     cout << " to the trip" << endl;
 }
 
-void display_trip(list<Goat> trip)
+void display_trip(set<Goat> trip)
 {
     if (trip.empty())
     {
@@ -142,7 +142,7 @@ void display_trip(list<Goat> trip)
 
     cout << "Current Goat Trip:" << endl;
     int index = 1; // loop through the list and output
-    for (list<Goat>::iterator it = trip.begin(); it != trip.end(); it++)
+    for (auto it = trip.begin(); it != trip.end(); it++)
     {
         cout << "[" << setw(2) << index << "] ";
         // use helper function
